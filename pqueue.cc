@@ -22,7 +22,7 @@ public:
     }
 
     void insert (T t) {
-        int i,p;
+        int i,p; // p=parent of the node inserted
         x[++n] = t;
         for (i = n; i > 1 && x[p=i/2] > x[i]; i = p)
             swap(p,i);
@@ -30,14 +30,14 @@ public:
 
     T extractmin(){
 
-        int i,c;
+        int i,c; //c = child
         T t = x[1];
         x[1] = x[n--];
         for (i = 1; (c = 2*i) <= n; i = c) {
-            if (c+1 < n && x[c+1] < x[c])
-                c++;
+            if (c+1 < n && x[c+1] < x[c]) 
+                c++; // se o filho da direita é menor que o da esquerda, usa o menor
             if (x[i] <= x[c])
-                break;
+                break; // se o atual é menor ou igual ao filho, finaliza o loop
             swap(c,i);
         }
         return t;
