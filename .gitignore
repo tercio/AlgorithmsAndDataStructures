@@ -5,3 +5,4 @@ __pycache__/*
 words
 words_count
 words_count_hash
+has_sum
