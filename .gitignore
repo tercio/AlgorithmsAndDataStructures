@@ -7,3 +7,4 @@ words_count
 words_count_hash
 has_sum
 pqueue
+.gitignore~
