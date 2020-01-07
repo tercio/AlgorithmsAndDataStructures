@@ -42,8 +42,9 @@ class Trie:
             index = self.get_index(word[i])
             if not curnode:
                 return False
-            curnode = curnode.children.get(index)
             print ("index: ",index, " chr: ",chr(index+ord('a'))," ",curnode.terminating)
+            curnode = curnode.children.get(index)
+            
         
         return True if curnode and curnode.terminating else False
 
@@ -51,7 +52,7 @@ class Trie:
 
 if __name__ == "__main__":
 
-    strings = ["bye","she","car","shells","shellsort"]
+    strings = ["bye","she","car","shells","shellsort","shellfish"]
 
     t = Trie()
     for word in strings:
@@ -62,5 +63,6 @@ if __name__ == "__main__":
     print ("searching for: shells " , t.search("shells"))
     print ("searching for: shellsort " , t.search("shellsort"))
     print ("searching for: shellsortalgo " , t.search("shellsortalgo"))
+    print ("searching for: shellfish " , t.search("shellfish"))
 
     
