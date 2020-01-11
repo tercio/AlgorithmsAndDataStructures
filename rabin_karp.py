@@ -1,6 +1,6 @@
 class RollingHash ():
 
-    def __init__(self,p = 941, alphasize = 256):
+    def __init__(self,p = 1069, alphasize = 256):
         self.p = p
         self.a = alphasize   
         self.u = 0 
@@ -22,7 +22,7 @@ class RollingHash ():
 
 if __name__ == "__main__":
 
-    s = "karp"
+    s = "rabin karp"
     rs = RollingHash()
 
     for c in s:
