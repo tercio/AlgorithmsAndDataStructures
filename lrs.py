@@ -1,15 +1,27 @@
 # Longest Repeated Substring
 
+#
+# Notes about performance:
+#  I found the using array or strings slices causes the script to become very, very slow
+#  When I had to use then on lcp() or on the for, or on the suffix processing, the time was more than 1 hour 
+#  (in fact, I interrupted the script). 
+#  Also, using a new array to the suffix array, caused the S.O to kill the script, as the size of the memory
+#  used was really big. I preferred to create an suffix array that is only a pointer like to the initial position
+#  of each substring (same as the poiter "a" on my longest_duplicate.c)
+
+
 import fileinput
 import sys
 
 sg = ""
 
-def lcp (s1,s2):
+def lcp (pos1,pos2):
     
     i = 0
-    while i < len(s1) and i < len(s2):
-        if s1[i] != s2[i]:
+    lena = len(sg) - pos1
+    lenb = len(sg) - pos2
+    while i < lena and i < lenb:
+        if sg[pos1+i] != sg[pos2+i]:
             break
         i += 1
     
@@ -22,10 +34,13 @@ def cmp_to_key(mycmp):
         def __init__(self, obj, *args):
             self.obj = obj
         def __lt__(self, other):
+            #print ("<0")
             return mycmp(self.obj, other.obj) < 0
         def __gt__(self, other):
+            #print (">")
             return mycmp(self.obj, other.obj) > 0
         def __eq__(self, other):
+            #print ("==")
             return mycmp(self.obj, other.obj) == 0
         def __le__(self, other):
             return mycmp(self.obj, other.obj) <= 0
@@ -35,13 +50,49 @@ def cmp_to_key(mycmp):
             return mycmp(self.obj, other.obj) != 0
     return K
 
+def sort_suffix_slow(a,b):
+
+    
+    #print (a," ",b," -- ",sg[a:]," ",sg[b:])
+    # stcmp like
+    lenb = len(sg[b:])
+    for pos,_ in enumerate(sg[a:]):
+
+        if pos >= lenb: break            
+        if sg[a+pos] != sg[b+pos]: break
+
+    if pos >= lenb:
+        pos -= 1
+    
+    #print (" -> ",sg[a+pos]," - ",sg[b+pos])
+    #print (" -> ",ord(sg[a+pos]) - ord(sg[b+pos]))
+
+    return ord(sg[a+pos]) - ord(sg[b+pos])
+
+
 def sort_suffix(a,b):
     #print (a," ",b," -- ",sg[a:]," ",sg[b:])
     # stcmp like
-    if sg[a:] == sg[b:]: return 0
-    if sg[a:] > sg[b:]: return 1
-    if sg[a:] < sg[b:]: return -1
+
+    lena = len(sg) - a
+    lenb = len(sg) - b
+
+    pos = 0
+    while pos < lena and pos < lenb:
+
+        if pos >= lenb: break            
+        if sg[a+pos] != sg[b+pos]: break
+        pos += 1
+
+    if pos >= lena:
+        pos -= 1
+    if pos >= lenb:
+        pos -= 1
     
+    #print (" -> ",sg[a+pos]," - ",sg[b+pos])
+    #print (" -> ",ord(sg[a+pos]) - ord(sg[b+pos]))
+
+    return ord(sg[a+pos]) - ord(sg[b+pos])    
 
 def lrs (s):
     
@@ -64,11 +115,16 @@ def lrs (s):
   
     lrs_str = ""
     max_len = -1
-    for i,pos in enumerate(suffix[:-1]):
-        lrs_len = lcp(s[suffix[i]:],s[suffix[i+1]:])
+    i = 0
+    slen = len(suffix)
+    while i < slen-1:
+        
+        lrs_len = lcp(suffix[i],suffix[i+1])
         if lrs_len > max_len:
             max_len = lrs_len
-            lrs_str = s[pos:pos+lrs_len]
+            lrs_str = s[suffix[i]:suffix[i]+lrs_len]
+
+        i += 1
 
     print ("lcp done")
 
