@@ -8,7 +8,10 @@
 #  Also, using a new array to the suffix array, caused the S.O to kill the script, as the size of the memory
 #  used was really big. I preferred to create an suffix array that is only a pointer like to the initial position
 #  of each substring (same as the poiter "a" on my longest_duplicate.c)
-
+#
+#  The time for boy dick.txt with 1.2 milion chars dropped from more than one hour (probably much more, I had interrupted the script)
+#  to something about 27.secs
+#
 
 import fileinput
 import sys
