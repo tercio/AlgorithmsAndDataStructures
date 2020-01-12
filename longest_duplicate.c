@@ -58,9 +58,10 @@ int main(){
 	//for (int i=0; i< n; i++)
 	//	printf ("suffix: sorted: %s\n",a[i]);
 
+	int clen = 0;
 	for (int i=0;i<n-M;i++){ // testa a string atual com a próxima
-		if (comlen(a[i],a[i+M])>maxlen){ // se o len aqui, for maior que maxlen (o maior len até agora)
-			maxlen=comlen(a[i],a[i+M]); 
+		if ((clen = comlen(a[i],a[i+M])) > maxlen){ // se o len aqui, for maior que maxlen (o maior len até agora)
+			maxlen = clen;
 			maxi=i; // posição onde a maior string repetida foi encontrada
 		}
 	}
@@ -68,6 +69,7 @@ int main(){
 	char *dup;
 	dup = malloc(maxlen+1);
 	strncpy(dup,a[maxi],maxlen);
+	dup[maxlen+1] = '\0';
 
 	printf("%d : %s\n",maxi,dup);
 
