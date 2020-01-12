@@ -65,7 +65,11 @@ int main(){
 		}
 	}
 
-	printf("%d : %s\n",maxi,a[maxi]);
+	char *dup;
+	dup = malloc(maxlen+1);
+	strncpy(dup,a[maxi],maxlen);
+
+	printf("%d : %s\n",maxi,dup);
 
 	return 0;
 }
