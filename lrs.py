@@ -3,6 +3,8 @@
 import fileinput
 import sys
 
+sg = ""
+
 def lcp (s1,s2):
     
     i = 0
@@ -13,23 +15,60 @@ def lcp (s1,s2):
     
     return i
 
+
+def cmp_to_key(mycmp):
+    'Convert a cmp= function into a key= function'
+    class K:
+        def __init__(self, obj, *args):
+            self.obj = obj
+        def __lt__(self, other):
+            return mycmp(self.obj, other.obj) < 0
+        def __gt__(self, other):
+            return mycmp(self.obj, other.obj) > 0
+        def __eq__(self, other):
+            return mycmp(self.obj, other.obj) == 0
+        def __le__(self, other):
+            return mycmp(self.obj, other.obj) <= 0
+        def __ge__(self, other):
+            return mycmp(self.obj, other.obj) >= 0
+        def __ne__(self, other):
+            return mycmp(self.obj, other.obj) != 0
+    return K
+
+def sort_suffix(a,b):
+    #print (a," ",b," -- ",sg[a:]," ",sg[b:])
+    # stcmp like
+    if sg[a:] == sg[b:]: return 0
+    if sg[a:] > sg[b:]: return 1
+    if sg[a:] < sg[b:]: return -1
+    
+
 def lrs (s):
     
-    suffix = ['']*len(s)
-    for i,_ in enumerate(s):
-        suffix[i] = s[i:]
+    #suffix = sorted(s[i:] for i,_ in enumerate(s)) # too slow for moby dick file ~1.2 m chars and worst, we get a kill from s.o. because of memory usage
+    #suffix = [s[i:] for i,_ in enumerate(s)]
+    #suffix.sort()
+    #print (suffix)
+    #print (len(suffix))
+
+    suffix = [i for i in range(0,len(s))] # pointer like to the original string, but still slow. 
+    print ("pre suffix done")
+    #suffix = sorted(suffix,key=lambda key: s[key:])
+    suffix.sort(key=cmp_to_key(sort_suffix)) # with this, no problem with memory as we don't create those big arrays, But still very slow!
+
     print ("suffix read")
+    #print (suffix)
+    #for pos in suffix:
+    #    print (s[pos:],end="")
 
-    suffix.sort()
-    print ("suffix sorted")
-
+  
     lrs_str = ""
     max_len = -1
-    for i in range(0,len(s)-1):
-        lrs_len = lcp(suffix[i],suffix[i+1])
+    for i,pos in enumerate(suffix[:-1]):
+        lrs_len = lcp(s[suffix[i]:],s[suffix[i+1]:])
         if lrs_len > max_len:
             max_len = lrs_len
-            lrs_str = suffix[i][:lrs_len]
+            lrs_str = s[pos:pos+lrs_len]
 
     print ("lcp done")
 
@@ -43,11 +82,12 @@ if __name__ == "__main__":
     translation = {'\r\n':''}
 
     lines = sys.stdin.readlines()
-    lines = "".join(lines                                                                                                                                                                                                                                                                                                                                                                               )
-    lines = lines.translate(translation)
+    chars = "".join(lines)
+    #lines = lines.translate(translation)
 
-    print ("input ok")
-    print (lrs(lines))
+    sg = chars
+    print ("input ok - #",len(chars)," chars read")
+    print (lrs(chars))
 
 
 
