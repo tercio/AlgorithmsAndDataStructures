@@ -29,8 +29,9 @@ def radix_sort (aList,r):
         # na parte de posicionamento, a conta fique facil
         # ex.: ((8 // (10 ** 0)) % r) = 8  # testando o primeiro digito (unidades)
         # ex.: ((28 // (10 ** 1)) % r) = 2 # testando o segundo digito (dezenas)
-        bucket = ((aList[i] // (10 ** d)) % r)
+        
         for i in range(0,n):
+            bucket = ((aList[i] // (10 ** d)) % r)
             count [(bucket) + 1] += 1
         #print (count)
 
@@ -42,6 +43,7 @@ def radix_sort (aList,r):
         # copia os dados ordenados para a aux
         aux = [0] * n
         for i in range (0,n):
+            bucket = ((aList[i] // (10 ** d)) % r)
             aux[ count [ (bucket)  ]   ] = aList[i]
             count [ (bucket)  ] += 1
 
