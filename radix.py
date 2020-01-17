@@ -1,7 +1,7 @@
 # Esse algoritmo é baseado no LSD de strings do livro Algorithms 
 # Inclusive seria possível deixa-lo mais genérico para que também
 # ordenasse strings do mesmo tamanho
-# Usa o index counting (o for d in range(0,ndigits) ) para ordenar
+# Usa o key index counting (o for d in range(0,ndigits) ) para ordenar
 
 def radix_sort (aList,r):
     
