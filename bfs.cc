@@ -89,10 +89,10 @@ int main () {
     vector<int>::iterator it;
 
     // Coloque aqui o node que deseja iniciar a pesquisa
-    int start_vertex = 2;
+    int start_vertex = 0;
 
     // coloque aqui o node que deseja saber se esta conectado ao inicial
-    int nodeToFind = 4;
+    int nodeToFind = 6;
 
     int N = 8; // number of vertices
 
