@@ -9,3 +9,8 @@ has_sum
 pqueue
 .gitignore~
 longest_duplicate
+.trie.py.swp
+bst
+sign
+squash
+substring_search_bf

@@ -33,6 +33,7 @@ class Trie:
 
         curnode.terminating = True
 
+    
     def search (self,word):
 
         curnode = self.root
@@ -47,6 +48,29 @@ class Trie:
             
         
         return True if curnode and curnode.terminating else False
+
+    
+    def keys_with_prefix (self,prefix):
+
+        q = []
+        self.collect(self.root,None,prefix,q)
+        return q
+
+
+    def collect (self,node,idx,prefix,q):
+        
+        if node == None:
+            return
+
+        if idx:
+            q.append(prefix)
+
+        a = self.get_index('a')
+        b = self.get_index('z')
+        for i in range (a,b):
+            if i in node.children:
+                self.collect(node.children.get(i),i,prefix + (chr(i + ord('a')) ),q)
+    
 
 
 
@@ -65,4 +89,6 @@ if __name__ == "__main__":
     print ("searching for: shellsortalgo " , t.search("shellsortalgo"))
     print ("searching for: shellfish " , t.search("shellfish"))
 
+    q = t.keys_with_prefix("")
+    print (q)
     
