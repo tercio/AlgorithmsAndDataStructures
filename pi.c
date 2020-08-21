@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <time.h>
 
+static unsigned int g_seed = RAND_MAX;
+
+// https://software.intel.com/content/www/us/en/develop/articles/fast-random-number-generator-on-the-intel-pentiumr-4-processor.html
+inline int fastrand() {
+	g_seed = (214013*g_seed+2531011);
+	return g_seed;
+	//return (g_seed>>16)&0x7FFF;
+}
 
 int main () {
 
@@ -14,8 +22,11 @@ int main () {
 
     while (n_runs --) {
 
-        x = (double)rand()/RAND_MAX*2.0-1.0;
-        y = (double)rand()/RAND_MAX*2.0-1.0;
+        //x = (double)rand()/RAND_MAX*2.0-1.0;
+        //y = (double)rand()/RAND_MAX*2.0-1.0;
+
+        x = (double)fastrand()/RAND_MAX;
+        y = (double)fastrand()/RAND_MAX;
 
         if (x*x + y*y <= 1.0)
             dentro ++;
