@@ -28,12 +28,39 @@ def editDistance (s1,s2,m,n):
 
     memo[key] = result
     return result
+
  
+def editDistanceDP(s1,s2,m,n):
+
+    c = [[0 for x in range(n+1)] for x in range(m+1)]
+
+    for i in range(m+1):
+        for j in range (n+1):
+
+            if i == 0: # se o i=0, temos os valores restantes de j, ou seja, precisamos inserir todos os caracteres restantes de j
+                c[i][j] = j
+
+            elif j == 0: # se o j=0, temos os valores restabntes de i, oposto do acima
+                c[i][j] = i
+
+            elif s1[i-1] == s2[j-1]: # mesmo caracter, simplesmente faz a "recursão"
+                c[i][j] = c[i-1][j-1]
+
+            else: # valores diferentes, então testa os valores de insert, delete e replace
+                c[i][j] = 1 + min(
+                    c[i-1][j-1], # replace
+                    c[i][j-1],   # insert
+                    c[i-1][j]    # delete
+                )
+
+    print (c)
+    return c[i][j]
+
 
 #s1 = "saturday"
 #s2 = "monday"
-#s1 = "Rua Adele Zarzur"
-#s2 = "R. Adele Zarzur"
+s1 = "Rua Adele Zarzur"
+s2 = "R. Adele Zarzur"
 #s1 = "Rua Adele Santos Zarzur"
 #s2 = "R. Adele S. Zarzur"
 
@@ -49,3 +76,4 @@ def editDistance (s1,s2,m,n):
 # Se fosse algo como Santos e F. a diferença seria ainda maior
 
 print (editDistance(s1,s2,len(s1),len(s2)))
+print (editDistanceDP(s1,s2,len(s1),len(s2)))

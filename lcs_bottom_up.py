@@ -5,7 +5,8 @@
 
 def lcs (s1,s2,m,n):
 
-    lookup = [[0]*(n+1)]*(m+1)
+    #lookup = [[0]*(n+1)]*(m+1)
+    lookup = [[0 for x in range(n+1)] for x in range(m+1)]
 
     for i in range (1,m+1):
 
