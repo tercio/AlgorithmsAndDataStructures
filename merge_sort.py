@@ -35,6 +35,10 @@ def merge (aList,helper,low,middle,high):
 
         current += 1
 
+    # so preciso inserir o left, pois a lista toda aList já contem os mesmos valores de helper
+    # portanto, se uso toda o right, só preciso incluir o left depois do middle,
+    # porem, se uso todo o right, o left já está lá, ou seja, posso ignorar qualquer valor restante
+    # de left pois ele já está posicionado no lugar correto
     remaining = middle - lind
     for i in range(0,remaining + 1):
         aList[current + i] = helper[lind + i]

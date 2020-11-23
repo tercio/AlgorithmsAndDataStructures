@@ -2,6 +2,7 @@
 # Bottom up Version
 # https://www.techiedelight.com/longest-common-subsequence/
 
+substr = []
 
 def lcs (s1,s2,m,n):
 
@@ -28,10 +29,11 @@ if __name__ == "__main__":
     m = len(s1)
     n = len(s2)
     print ("LCS for ",s1," & ",s2," is: ",lcs(s1,s2,m,n))
-
+    print ("Substr: ",substr)
 
     s1 = "sao paulo"
     s2 = "em sao paulo sp"
     m = len(s1)
     n = len(s2)
     print ("LCS for ",s1," & ",s2," is: ",lcs(s1,s2,m,n))
+    print ("Substr: ",substr)

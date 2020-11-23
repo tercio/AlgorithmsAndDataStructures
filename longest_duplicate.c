@@ -69,7 +69,7 @@ int main(){
 	char *dup;
 	dup = malloc(maxlen+1);
 	strncpy(dup,a[maxi],maxlen);
-	dup[maxlen+1] = '\0';
+	dup[maxlen] = '\0';
 
 	printf("%d : %s\n",maxi,dup);
 

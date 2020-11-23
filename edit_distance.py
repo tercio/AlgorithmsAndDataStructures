@@ -53,14 +53,14 @@ def editDistanceDP(s1,s2,m,n):
                     c[i-1][j]    # delete
                 )
 
-    print (c)
+    #print (c)
     return c[i][j]
 
 
-#s1 = "saturday"
-#s2 = "monday"
-s1 = "Rua Adele Zarzur"
-s2 = "R. Adele Zarzur"
+s1 = "saturday"
+s2 = "monday"
+#s1 = "Rua Adele Zarzur"
+#s2 = "R. Adele Zarzur"
 #s1 = "Rua Adele Santos Zarzur"
 #s2 = "R. Adele S. Zarzur"
 
