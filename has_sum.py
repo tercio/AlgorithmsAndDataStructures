@@ -25,6 +25,6 @@ if __name__ == "__main__":
     sum = 8
     print ("%s has sum %d %s" % (data,sum,has_sum(data,sum)))
 
-    data = [1,2,3,4,5,9]
+    data = [1,2,3,11,20,5,9]
     sum = 8
     print ("%s has sum %d %s" % (data,sum,has_sum(data,sum)))
