@@ -21,7 +21,7 @@ state = 'look_for_string'
 
 str = """
 teste de string
-com "texto dentro de \\"aspas\\""
+com "texto dentro de \\"aspas\\"
 para o "parse"
 """
 
